@@ -6,7 +6,6 @@ int farbe1, farbe2, farbe3, vorfarbe1,vorfarbe2, vorfarbe3, qMax, cont; // farbe
 boolean quad;
 boolen up, down;
 float spaceBall;
-float valor = 50;
 int raqX, raqY, raqW, raqH, raqMove;// para criação inicial das raquetes
 
 
@@ -17,8 +16,8 @@ void setup() {
 	py = height/2;
 	largbol=30;
 	altbol=30;
-	speedX = 3;
-	speedY = 2;
+	speedX = 4;
+	speedY = 3;
 		
 	// raquetes
   raqX = 40; 
@@ -31,7 +30,7 @@ void setup() {
 		
 	
 	// determina o espaço entre as bolinhas
-	spaceBall = largbol+20;
+	//spaceBall = largbol+20;
 		//posição da bolinha
 	vertx = verty = -100;
 		
@@ -55,6 +54,7 @@ void draw() {
 	incrementa();
 	limites();
 	moverRaquetes();
+	colisao();
 }
 
 void quadra(){
@@ -113,8 +113,8 @@ void incrementa (){
 
 
 void mousePressed() {
-	speedX = random (-2,2);
-	speedY = random (-2,2);
+	speedX = random (-1,4);
+	speedY = random (-2,3);
 	
 		}
 
@@ -125,9 +125,9 @@ void raquetes(){
   noStroke();
  rect(raqX, raqY, raqW, raqH); // raquete da esquerda
 	
-	fill(0);
-  noStroke();
-  rect(raqX*14.3, raqY, raqW, raqH); // raquete da direita
+	//fill(0);
+  //noStroke();
+  //rect(raqX*14.3, raqY, raqW, raqH); // raquete da direita
  }
 void moverRaquetes(){
 	if(up){
@@ -137,6 +137,13 @@ void moverRaquetes(){
 		raqY = raqY +raqMove;
 	}
 		
+}
+
+void colisao () {
+if (px-largbol/2 <raqX + raqW && py-altbol/2 <raqY +raqH){
+speedX = -speedX;
+}
+
 }
 
 void keyPressed() {
@@ -157,3 +164,5 @@ if (key == 's'|| key =='S'){
 		down = false;
 	}
 }
+
+	
