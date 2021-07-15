@@ -1,5 +1,5 @@
 # base-pong
-Testes para criar o jogo pong
+
 float px, py, largbol, altbol, speedX, speedY;
 float vertx, verty; 
 int farbe1, farbe2, farbe3, vorfarbe1,vorfarbe2, vorfarbe3, qMax, cont; // farbe(cor em alemão)
