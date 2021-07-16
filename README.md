@@ -11,20 +11,21 @@ int raqX, raqY, raqW, raqH, raqMove;// para criação inicial das raquetes
 
 void setup() {
 	// Inicialização dos dados
-	size(640, 360);
+	size(600, 300);
 	px = width/2;
 	py = height/2;
 	largbol=30;
 	altbol=30;
-	speedX = 4;
-	speedY = 3;
+	speedX = 3;
+	speedY = 2;
 		
 	// raquetes
+	rectMode(CENTER);
   raqX = 40; 
-	raqY = 50;
+	raqY = height/2;
 	raqW = 30;
-	raqH = 150;
-	raqMove = 2;
+	raqH = 100;
+	raqMove =2;
 	
 	
 		
@@ -48,12 +49,13 @@ void setup() {
 		}
 
 void draw() {
-	raquetes();
+	raquete();
 	quadra();
 	bola();
 	incrementa();
 	limites();
-	moverRaquetes();
+	moverRaquete();
+	limitesRaquete();
 	colisao();
 }
 
@@ -118,7 +120,7 @@ void mousePressed() {
 	
 		}
 
-void raquetes(){
+void raquete(){
 	
   background(255);
   fill(0);
@@ -129,7 +131,7 @@ void raquetes(){
   //noStroke();
   //rect(raqX*14.3, raqY, raqW, raqH); // raquete da direita
  }
-void moverRaquetes(){
+void moverRaquete(){
 	if(up){
 		raqY = raqY -raqMove;
 	}
@@ -139,9 +141,20 @@ void moverRaquetes(){
 		
 }
 
-void colisao () {
-if (px-largbol/2 <raqX + raqW && py-altbol/2 <raqY +raqH){
-speedX = -speedX;
+void limitesRaquete(){
+	if (raqY - raqH/2 <0) {
+			raqY = raqY+ raqMove;
+			}
+	if (raqY + raqH/2 >height) {
+			raqY = raqY- raqMove;
+			}
+	
+}
+
+   void colisao () {
+   if (px-largbol/2 <raqX + raqW/2 && py-altbol/2 <raqY + raqH/2 && py+altbol/2 >raqY - raqH/2){
+   speedX = -speedX;
+
 }
 
 }
@@ -164,5 +177,6 @@ if (key == 's'|| key =='S'){
 		down = false;
 	}
 }
+
 
 	
