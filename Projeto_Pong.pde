@@ -1,10 +1,9 @@
 float px, py, largbol, altbol, speedX, speedY;
 float vertx, verty; 
-float farbe1, farbe2, farbe3, vorfarbe1,vorfarbe2, vorfarbe3, qMax, cont; // farbe(cor em alemão)
+float cor1, cor2, cor3, acor1,acor2, acor3, qMax, cont; 
 boolean quad;
 boolean up, down;
-float spaceBall;
-int raqX, raqY, raqW, raqH, raqMove;// para criação inicial das raquetes
+int raqX, raqY, raqW, raqH, raqMove;// raquete
 
 
 void setup() {
@@ -17,7 +16,7 @@ void setup() {
   speedX = 3;
   speedY = 3;
     
-  // raquetes
+  // raquete
   rectMode(CENTER);
   raqX = 40; 
   raqY = height/2;
@@ -26,19 +25,13 @@ void setup() {
   raqMove =2;
   
   
-    
-  
-  // determina o espaço entre as bolinhas
-  //spaceBall = largbol+20;
-    //posição da bolinha
+  //posição da bolinha no canto
   vertx = verty = -100;
     
-
-      
+     
   //cores
-  vorfarbe1=vorfarbe2=vorfarbe3= 255;
-  farbe1=farbe2=farbe3 = 255;
-  qMax = 5;
+  acor1=acor2=acor3= 255;
+  cor1=cor2=cor3 = 255;
   cont = 0;
   
   //quadrante
@@ -51,7 +44,7 @@ void draw() {
   quadra();
   bola();
   incrementa();
-  limites();
+  TrocaCor();
   moverRaquete();
   limitesRaquete();
   colisao();
@@ -63,22 +56,21 @@ void quadra(){
   line(width/2,0,width/2,height);
   line(0,height/2, width,height/2);
   stroke(255,100,255);
-  qMax = 5;
-  
+    
 }
 
 void bola(){
-  fill(vorfarbe1, vorfarbe2, vorfarbe3);
+  fill(acor1, acor2, acor3);
   ellipse(vertx, verty, largbol, altbol);
   
   // Faz a nova bolinha, que se move
-  fill(farbe1, farbe2, farbe3);
+  fill(cor1, cor2, cor3);
   ellipse(px, py, largbol, altbol);
   
   
 }
 
-void incrementa (){
+void incrementa (){ // incrementa e quica
   
   px = px + speedX;
   py = py + speedY;
@@ -93,16 +85,16 @@ void incrementa (){
   }
 }
     
-  void limites(){ //Delimita os quadrantes e troca as cores
+  void TrocaCor(){ //Delimita os quadrantes e troca as cores
   
   if(((px<width/2 - largbol) && (py<height/2 - largbol))||
      ((px>width/2 + largbol) && (py<height/2 - largbol))||
      ((px<width/2 - largbol) && (py>height/2 + largbol))||
      ((px>width/2 + largbol) && (py>height/2 + largbol))) {
         if(!quad){
-          farbe1 = random(255);
-          farbe2 = random(255);
-          farbe3 = random(255);
+          cor1 = random(255);
+          cor2 = random(255);
+          cor3 = random(255);
       quad = true;
          }
        }
@@ -111,24 +103,13 @@ void incrementa (){
        }
     }
 
-
-void mousePressed() {
-  speedX = random (-1,4);
-  speedY = random (-2,3);
-  
-    }
-
 void raquete(){
-  
-  background(255);
+  background(255, 255, 0);
   fill(0);
   noStroke();
- rect(raqX, raqY, raqW, raqH); // raquete da esquerda
+  rect(raqX, raqY, raqW, raqH); // raquete da esquerda
   
-  //fill(0);
-  //noStroke();
-  //rect(raqX*14.3, raqY, raqW, raqH); // raquete da direita
- }
+   }
 void moverRaquete(){
   if(up){
     raqY = raqY -raqMove;
@@ -176,4 +157,3 @@ if (key == 's'|| key =='S'){
   }
 }
 
-//https://github.com/danieleleitedemorais/base-pong/blob/main/README.md
