@@ -1,5 +1,5 @@
 # base-pong
-## Projeto do Jogo Pong para Disciplina de programação - SMD
+### Projeto do Jogo Pong para Disciplina de programação - SMD
 
 
 
